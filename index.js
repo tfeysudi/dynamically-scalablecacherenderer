@@ -1,8 +1,10 @@
-function sortedArrayToBST(nums) {
-  if (!nums.length) return null;
-  const mid = Math.floor(nums.length / 2);
-  const root = new TreeNode(nums[mid]);
-  root.left = sortedArrayToBST(nums.slice(0, mid));
-  root.right = sortedArrayToBST(nums.slice(mid + 1));
-  return root;
+function minimumTotal(triangle) {
+  const n = triangle.length;
+  const dp = triangle[n - 1];
+  for (let i = n - 2; i >= 0; i--) {
+    for (let j = 0; j <= i; j++) {
+      dp[j] = triangle[i][j] + Math.min(dp[j], dp[j + 1]);
+    }
+  }
+  return dp[0];
 }
