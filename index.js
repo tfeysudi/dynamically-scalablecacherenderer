@@ -1,11 +1,14 @@
-function isValidBST(root) {
-  return isValid(root, null, null);
-}
-function isValid(node, min, max) {
-  if (!node) return true;
-  if ((min !== null && node.val <= min) || (max !== null && node.val >= max))
-    return false;
-  return (
-    isValid(node.left, min, node.val) && isValid(node.right, node.val, max)
-  );
+function lengthOfLIS(nums) {
+  if (nums.length === 0) return 0;
+  const dp = new Array(nums.length).fill(1);
+  let max = 1;
+  for (let i = 1; i < nums.length; i++) {
+    for (let j = 0; j < i; j++) {
+      if (nums[i] > nums[j]) {
+        dp[i] = Math.max(dp[i], dp[j] + 1);
+        max = Math.max(max, dp[i]);
+      }
+    }
+  }
+  return max;
 }
